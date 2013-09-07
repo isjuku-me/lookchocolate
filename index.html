@@ -40,7 +40,9 @@ $(function(){
 			console.log(txtEnc);
 			++i;
       	});
-		var kekka = '検索結果' + i + "件"
+
+		var page = Math.ceil(i / 10);
+		var kekka = '検索結果' + i + "件/ページ数" + page + "枚"		
 		$('#kekka').html(kekka);
 		$('#result').html(list);
 
