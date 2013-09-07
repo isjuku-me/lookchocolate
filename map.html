@@ -28,7 +28,7 @@ function getRequest(){
   }
 }
 var get = getRequest();
-alert(get['txt'])
+alert(get['lat'])
 </script>
 </head>
 <body>
@@ -58,7 +58,7 @@ alert(get['txt'])
 	};
 	var myInfoWindow = new google.maps.InfoWindow({
 		// 吹き出しに出す文
-		content: get['txt']
+		content: ' '+decodeURI(get['name'])+' <br>'
 	});
 
 	// 吹き出しを開く
