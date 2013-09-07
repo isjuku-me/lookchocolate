@@ -22,9 +22,9 @@ $(function(){
 	var area = $('#ab-area-sel').val();
 	var country = $('#ab-country-sel').val();
 	var city = $('#ab-city-sel').val();
-    var url = 'http://webservice.recruit.co.jp/ab-road/spot/v1/?key=4e34e547a96f0307&format=jsonp&area=' + area + '&country=' + country +'&city=' + city +'&callback=?';
+    var url = 'http://webservice.recruit.co.jp/ab-road/spot/v1/?key=4e34e547a96f0307&format=jsonp&area=' + area + '&country=' + country +'&city=' + city + '&count=100&callback=?';
     $.getJSON(url, function(data){
-		
+		var i = 0;
 		$( data.results.spot ).each( function(){
 
 			var txt = this.name;
@@ -38,9 +38,10 @@ $(function(){
 			list += '<a href=map.html?lat=' + this.lat + '&lng=' + this.lng + '&name=' + txtEnc +'>google map</a>';
 			list += '<div>';
 			console.log(txtEnc);
-
+			++i;
       	});
-	
+		var kekka = '検索結果' + i + "件"
+		$('#kekka').html(kekka);
 		$('#result').html(list);
 
     });
@@ -61,6 +62,7 @@ $(function(){
     <button value="検索" id="searchj" class="btn btn-primary" />検索</button>
 </section>
 <section>
+	<div id="kekka" style="clear:both" /></div>
 	<div id="result" style="clear:both" /></div>
 </section>
 <footer>
