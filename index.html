@@ -1,0 +1,71 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>JSONP</title>
+<link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css">
+<script src="http://code.jquery.com/jquery-1.5.1.min.js"></script>
+<script type="text/javascript" src="./js/recruit.ui.js"></script>
+<script type="text/javascript" src="./js/abroad.ui.js"></script>
+<script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
+<link href="css/bootstrap.min.css" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css" type="text/css">
+<script type="text/javascript">
+
+$(function(){
+	Recruit.UI.key = '4e34e547a96f0307';
+    new ABROAD.UI.Places.Pulldown();
+
+  $('#searchj').click(function(){
+	var list = '';
+	var key = $('#keyword').val();
+	var area = $('#ab-area-sel').val();
+	var country = $('#ab-country-sel').val();
+	var city = $('#ab-city-sel').val();
+    var url = 'http://webservice.recruit.co.jp/ab-road/spot/v1/?key=4e34e547a96f0307&format=jsonp&area=' + area + '&country=' + country +'&city=' + city +'&callback=?';
+    $.getJSON(url, function(data){
+		
+		$( data.results.spot ).each( function(){
+
+			var txt = this.name;
+			list += '<h3>' + txt + "</h3>";
+        	list += '<div>';
+			list += '<p><strong>' + this.code + '</strong></p>';
+			list += '<p><strong>' + this.title + '</strong></p>';
+			list += '<p>' + this.description + '</p>';			
+			//list += '<a href=http://maps.google.com/maps?q=' + this.lat + ',' + this.lng + '>google map</a>';
+			list += '<a href=map.html?lat=' + this.lat + '&lng=' + this.lng + '&name=' + txt +'>google map</a>';
+			list += '<div>';
+			console.log(this.lat);
+
+      	});
+	
+		$('#result').html(list);
+		$('#result').accordion();
+
+    });
+
+  });
+  
+});
+
+</script>
+</head>
+<body>
+<header>
+</header>
+<section>
+    <select id="ab-area-sel" class="form-control"></select>
+    <select id="ab-country-sel" class="form-control"></select>
+    <select id="ab-city-sel" class="form-control"></select>
+    <button value="検索" id="searchj" class="btn btn-primary" />検索</button>
+</section>
+<section>
+	<div id="result" style="clear:both" /></div>
+</section>
+<footer>
+<aside>リンク</aside>
+<small>copyright</small>
+</footer>
+</body>
+</html>
