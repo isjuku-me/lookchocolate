@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<link rel="stylesheet" href="lite.css" type="text/css" />
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+<script>
+$(function() {
+    $(".accordion dd").css("display","none");
+    $(".accordion dt").click(function(){
+        $(this).toggleClass("open").next().slideToggle("fast");
+    });
+});
+</script>
+</head>
+<body>
+
+<ul>
+  <li>
+    <dl class="accordion">
+    <dt>タイトル</dt>
+    <dd>
+    <ul>
+      <li><a href="#">中身</a></li>
+      <li><a href="#">中身</a></li>
+    </ul>
+    </dd>
+    </dl>
+  </li>
+  <li>
+    <dl class="accordion">
+    <dt><h2>タイトル</h2></dt>
+    <dd>
+    <ul>
+      <li><a href="#">中身</a></li>
+      <li><a href="#">中身</a></li>
+    </ul>
+    </dd>
+    </dl>
+  </li>
+  <li>
+    <dl class="accordion">
+    <dt><h2>タイトル</h2></dt>
+    <dd>
+    <ul>
+      <li><a href="#">中身</a></li>
+      <li><a href="#">中身</a></li>
+    </ul>
+    </dd>
+    </dl>
+  </li>
+</ul>
+
+</body>
+</html>

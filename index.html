@@ -17,34 +17,39 @@ $(function(){
     new ABROAD.UI.Places.Pulldown();
 
   $('#searchj').click(function(){
-	var list = '';
+	var list = '<ul>';
 	var key = $('#keyword').val();
 	var area = $('#ab-area-sel').val();
 	var country = $('#ab-country-sel').val();
 	var city = $('#ab-city-sel').val();
-    var url = 'http://webservice.recruit.co.jp/ab-road/spot/v1/?key=4e34e547a96f0307&format=jsonp&area=' + area + '&country=' + country +'&city=' + city + '&count=100&callback=?';
+    var url = 'http://webservice.recruit.co.jp/ab-road/spot/v1/?key=4e34e547a96f0307&format=jsonp&area=' + area + '&count=50&country=' + country +'&city=' + city +'&callback=?';
     $.getJSON(url, function(data){
-		var i = 0;
+		
 		$( data.results.spot ).each( function(){
 
 			var txt = this.name;
 			var txtEnc = encodeURI(this.name);
-			list += '<h3>' + txt + '</h3>';
-        	list += '<div>';
-			//list += '<p><strong>' + this.code + '</strong></p>';
-			list += '<p><strong>' + this.title + '</strong></p>';
+			list += '<li>';
+			list += '<h2>' + txt + '</h2>';
+        	list += '<div class="text">';
+			list += '<p class="lititle">' + this.title + '</p>';
 			list += '<p>' + this.description + '</p>';			
-			list += '<a href=' + this.url + '>詳細へ</a><br />';
+			list += '<div class="link"><a href=' + this.url + '>詳細へ</a><br />';
 			list += '<a href=map.html?lat=' + this.lat + '&lng=' + this.lng + '&name=' + txtEnc +'>google map</a>';
-			list += '<div>';
+			list += '</div></div></li>';
 			console.log(txtEnc);
-			++i;
-      	});
 
-		var page = Math.ceil(i / 10);
-		var kekka = '検索結果' + i + "件/ページ数" + page + "枚"		
-		$('#kekka').html(kekka);
+      	});
+	list += '</ul>';
 		$('#result').html(list);
+$(function() {
+    $(".text").css("display","none");
+    $("li h2").click(function(){
+        $(this).toggleClass("open").next().slideToggle("fast");
+    });
+});
+
+
 
     });
 
@@ -53,24 +58,31 @@ $(function(){
 });
 
 </script>
+
 </head>
 <body>
+	<div id="wrap">
 <header>
+<h1><img src="img/title.jpg"/></h1>
 </header>
 <section>
+	<p class="title">観光地検索システム</p>	
     <select id="ab-area-sel" class="form-control"></select>
     <select id="ab-country-sel" class="form-control"></select>
     <select id="ab-city-sel" class="form-control"></select>
     <button value="検索" id="searchj" class="btn btn-primary" />検索</button>
 </section>
 <section>
-	<div id="kekka" style="clear:both" /></div>
 	<div id="result" style="clear:both" /></div>
 </section>
 <footer>
-<aside>リンク</aside>
-<small>copyright</small>
+<p>18時より<a href="http://www.ustream.tv/channel/foul">USTREAM</a>がありますので早く帰ります。by E</p>
+<p>これからもあきらめずにWebの勉強つづけます。by K</p>
+<small>All rights reserved. Kikuchi and Endoh</small>
+
+<p><a href="http://webservice.recruit.co.jp"><img src="http://webservice.recruit.co.jp/banner/abroad-s.gif" alt="エイビーロードWebサービス" width="135" height="17" border="0" title="エイビーロードWebサービス"></a></p>
 </footer>
+</div>
 </body>
 
 </html>
